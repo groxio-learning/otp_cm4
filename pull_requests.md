@@ -1,2 +1,1 @@
 - Bruce Tate
-- Harish Bakthavatchalu
