@@ -33,17 +33,12 @@ defmodule Minicraft.BoardCoreTest do
 
   test "test for Lost" do
     result =
-      BoardCore.new([1, 2, 3, 8])
-      |> BoardCore.move([1, 2, 3, 4])
-      |> BoardCore.move([1, 2, 3, 5])
-      |> BoardCore.move([1, 2, 3, 6])
-      |> BoardCore.move([1, 2, 3, 7])
-      |> BoardCore.move([5, 2, 3, 8])
-      |> BoardCore.move([6, 2, 3, 5])
-      |> BoardCore.move([1, 2, 1, 4])
-      |> BoardCore.move([1, 2, 5, 4])
-      |> BoardCore.move([1, 2, 3, 4])
-      |> BoardCore.move([1, 2, 6, 4])
+      fn -> [1, 2, 3, 7] end
+      |> Stream.repeatedly()
+      |> Enum.take(10)
+      |> Enum.reduce(BoardCore.new([1, 2, 3, 4]), fn guess, board ->
+        BoardCore.move(board, guess)
+      end)
       |> BoardCore.render()
 
     assert String.contains?(result, "Lost")
