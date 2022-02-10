@@ -4,6 +4,7 @@ end
 
 defmodule Minicraft.BoardCore do
   alias Minicraft.Board
+  alias MiniCraft.Score
 
   def new(), do: %Board{answer: random(), guesses: []}
 
@@ -31,9 +32,9 @@ defmodule Minicraft.BoardCore do
   defp render_status(%{guesses: guesses}),
     do: if(length(guesses) < @max_attempts, do: "Playing", else: "Lost")
 
-  defp render_row(_answer, guess),
+  defp render_row(answer, guess),
     do:
-      "#{Enum.at(guess, 0)} #{Enum.at(guess, 1)} #{Enum.at(guess, 2)} #{Enum.at(guess, 3)} | RRRR"
+      "#{Enum.at(guess, 0)} #{Enum.at(guess, 1)} #{Enum.at(guess, 2)} #{Enum.at(guess, 3)} #{Score.check(answer, guess)}"
 
   defp random, do: 1..8 |> Enum.shuffle() |> Enum.take(4)
 end
