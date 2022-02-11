@@ -1,18 +1,9 @@
 defmodule Minicraft do
-  @moduledoc """
-  Documentation for `Minicraft`.
-  """
+  def new(name) do
+    DynamicSupervisor.start_child(:sup, {Minicraft.Server, name})
+  end
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Minicraft.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def move(name, guess) do
+    Minicraft.Server.move(name, guess)
   end
 end

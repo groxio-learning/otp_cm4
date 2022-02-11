@@ -8,11 +8,12 @@ defmodule Minicraft.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {Minicraft.Server, :ironman},
-      {Minicraft.Server, :yoda},
-      {Minicraft.Server, :blackpanther},
-      {Minicraft.Server, :thanos},
-      {Minicraft.Server, :batman},
+      # {Minicraft.Server, :ironman},
+      # {Minicraft.Server, :yoda},
+      # {Minicraft.Server, :blackpanther},
+      # {Minicraft.Server, :thanos},
+      # {Minicraft.Server, :batman},
+      {DynamicSupervisor, strategy: :one_for_one, name: :sup}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -20,4 +21,6 @@ defmodule Minicraft.Application do
     opts = [strategy: :rest_for_one, name: Minicraft.Supervisor]
     Supervisor.start_link(children, opts)
   end
+
+
 end
