@@ -8,8 +8,7 @@ defmodule Minicraft.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Minicraft.Worker.start_link(arg)
-      # {Minicraft.Worker, arg}
+      {Minicraft.Server, :harish}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
