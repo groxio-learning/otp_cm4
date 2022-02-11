@@ -3,6 +3,8 @@ defmodule Minicraft.Server do
 
   alias Minicraft.BoardCore
 
+  # server callbacks
+
   @impl true
   def init(_answer) do
   {:ok, BoardCore.new()}
@@ -14,7 +16,12 @@ defmodule Minicraft.Server do
     {:reply, newboard |> BoardCore.render(), newboard}
   end
 
-   #API
+  def child_spec(name) do
+    %{id: name, start: {Minicraft.Server, :start_link, [name]}}
+
+  end
+
+   # Client API
    # Start the server
   def start_link(name) do
     IO.puts "Starting #{name}"
